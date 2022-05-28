@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile Info{% endblock %}
+
+    {% block content %}
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar bg-primary">
+                <div class="container">
+                    <a class="navbar-brand" href="{% url 'dashboard' %}">healthT R A C K E R</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicNav" aria-controls="basicNav" aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="basicNav">
+                <ul class="navbar-nav mr-auto smooth-scroll">
+                </ul>
+                  <ul class="navbar-nav nav-flex-icons">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'viewprofile' %}">{{user.username}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <p><a class="btn btn-primary" href="{% url 'logout' %}">Logout</a></p>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-secondary" href="{% url 'signup' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!---<div class="page-header">
+        <table class="table table-striped table-dark">
+            <thead class="thread-light">
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">DOB</th>
+                        <th scope="col">Sex</th>
+                    </tr>
+            </thead>
+            <tbody>
+                {% for item in profile %}
+                <tr>
+                    <td>{{item.username}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.birth_date}}</td>
+                    <td>{{item.sex}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>--->
+    <main class="bg-dark text-black" style="height:100vh;">
+        <br><br><br>
+        <div class="container bg-dark">
+            <div class="container bg-dark">
+                <div class = "card-deck bg-dark">
+                    <div class="card text-black bg-primary mb-3" style="max-width: 100rem;">
+                            <div class="card-header text-white">Profile Info:</div>
+                                <ul class="list-group list-group-flush">
+                                    {% for item in profile %}
+                                    <li class="list-group-item">Username : {{item.username}}</li>
+                                    <li class="list-group-item">Email : {{item.email}}</li>
+                                    <li class="list-group-item">Date of Birth : {{item.birth_date}}</li>
+                                    <li class="list-group-item">Sex: {{item.sex}}</li>
+                                    <li class="list-group-item">Height: {{item.height}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    
+    
+    
+    
+    {% endblock %}

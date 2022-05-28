@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+	{% block content %}
+    <style type="text/css">
+
+    </style>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar bg-primary" id="navbar">
+				<div class="container" id="nav-container">
+					<a class="navbar-brand" href="{% url 'dashboard' %}">healthT R A C K E R
+                    </a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicNav" aria-controls="basicNav" aria-expanded="false" aria-label="Toggle navigation">
+   					 <span class="navbar-toggler-icon"></span>
+  					</button>
+  					<div class="collapse navbar-collapse" id="basicNav">
+			<!--		<div class="navbar-header">
+						<a class="navbar-brand" href="#">BrandLogoWebsiteName</a>
+					</div>-->
+				<ul class="navbar-nav mr-auto smooth-scroll">
+				</ul>
+					<ul class="navbar-nav nav-flex-icons">
+						{% if user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'viewprofile' %}">{{user.username}}</a>
+						</li>
+						<li class="nav-item">
+							<p><a class="btn btn-primary" href="{% url 'logout' %}">Logout</a></p>
+						</li>
+						{% else %}
+						<li>
+							<a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+						</li>
+						<li>
+							<a class="btn btn-secondary" href="{% url 'signup' %}">Register</a>
+						</li>
+						{% endif %}
+					</ul>	
+				</div>
+			</div>
+		</nav>
+	</header>
+	<main class="bg-dark text-white" style="height:100vh;">
+        <br><br><br>
+        <div class="container bg-dark">
+			<div class="container bg-dark">
+				<div class = "card-deck bg-dark">
+	  				<div class="card text-white text-center bg-danger mb-3" style="max-width: 18rem;">
+	  					<div class="card-header">1</div>
+	  						<div class="card-body">
+	    						<h5 class="card-title">Calorie Intake Log</h5>
+	    						<p class="card-text">Log your daily calorie intake.</p>
+                                <br><br><br><br><br><br><br>
+	    						<a href="{% url 'testcalorie' %}" class="btn btn-secondary">Add</a>
+                                <a href="{% url 'viewcalorie' %}" class="btn btn-secondary">View</a>
+	  						</div>
+	  				</div>
+    				<div class="card text-white text-center bg-success mb-3" style="max-width: 18rem;">
+    					<div class="card-header">2</div>
+    					<div class="card-body">
+        					<h5 class="card-title">Body Mass Index(bmi)</h5>
+        					<p class="card-text">Calculate your bmi by logging your weight everyday</p>
+                            <br><br><br><br><br><br>
+        					<a href="{% url 'testbmi' %}" class="btn btn-secondary">Add</a>
+        					<a href="{% url 'viewbmi' %}" class="btn btn-secondary">View</a>
+      					</div>
+    				</div>
+    				<div class="card text-white text-center bg-primary mb-3" style="max-width: 18rem;">
+    					<div class="card-header">3</div>
+    					<div class="card-body">
+        					<h5 class="card-title">Calories Burnt Log</h5>
+        					<p class="card-text">Log your daily calorie expenditure and view your actual total calorie expenditure for the day by calculating your basal metabolic rate.</p>
+                            <br><br><br>
+        					<a href="{% url 'testbmr' %}" class="btn btn-secondary">Add</a>
+                            <a href="{% url 'viewbmr' %}" class="btn btn-secondary">View</a>
+      					</div>
+    				</div>
+    				<div class="card text-white text-center bg-warning mb-3" style="max-width: 18rem;">
+    					<div class="card-header">4</div>
+    					<div class="card-body">
+        					<h5 class="card-title">Visualize</h5>
+        					<p class="card-text">View your logged records in the form of charts</p>
+        					<a href="{% url 'chartweight' %}" class="btn btn-secondary">Weight</a>
+                            <br><br>
+                            <a href="{% url 'chartcalorieintake' %}" class="btn btn-secondary">Calorie Intake</a>
+                            <br><br>
+                            <a href="{% url 'chartcalorieintakevsburnt' %}" class="btn btn-secondary">Calorie Intake vs Burnt</a>
+      					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </main>
+	
+	
+	
+	{% endblock %}

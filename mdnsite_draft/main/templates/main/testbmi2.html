@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}TestBMI2{% endblock %}
+
+    {% block content %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'dashboard' %}">BrandLogoWebsiteName</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="#">Tracker</a>
+                    </li>
+                </ul>
+                
+                <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{user.username}}</a>
+                    </li>
+                    
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <p><a class="btn btn-primary" href="{% url 'logout' %}">Logout</a></p>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-secondary" href="{% url 'signup' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+    </nav>
+    
+    <div class="page-header">
+        {% if bmi_init %}
+        <h2>Your BMI is {{bmi_init}}</h2>
+        <h3> and has been added to the database</h3>
+        {% endif %}
+        <table class="table">
+            <thead>
+                    <tr>
+                        <th scope="col">Height</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col">Date Recorded</th>
+                        <th scope="col">BMI</th>
+                        <th scope="col">user</th>
+                    </tr>
+            </thead>
+            <tbody>
+                {% for item in bmi %}
+                <tr>
+                    <td>{{item.height}}</td>    
+                    <td>{{item.weight}}</td>
+                    <td>{{item.date_rec}}</td>
+                    <td>{{item.bmi}}</td>
+                    <td>{{item.username}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    
+    
+    
+    {% endblock %}

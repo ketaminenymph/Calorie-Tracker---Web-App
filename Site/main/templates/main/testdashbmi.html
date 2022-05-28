@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Weight Graph{% endblock %}
+{% block content %}
+
+  <div id="container"></div>
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'line',
+        },
+        title: {
+            text: 'Weight measured over a week'
+        },
+        yAxis: {
+          title:{
+            text: 'Weight(in Kg)'
+          }
+        },
+        xAxis: {
+            categories: [
+            {% for entry in dataset %}'{{ entry.weight }} {{ entry.date_rec}}'{% if not forloop.last %}, {% endif %}{% endfor %}
+            ]
+        },
+        series: [{
+            name: 'Weight(in kg)',
+            data: [
+              {% for entry in dataset %} {{ entry.weight}}{% if not forloop.last %}, {% endif %}{% endfor %}
+            ],
+            color: 'green'
+        },
+        ]
+    });
+  </script>
+
+{% endblock %}

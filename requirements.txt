@@ -1,0 +1,8 @@
+Django==2.2.3
+django-chartjs==2.3.0
+django-crispy-forms==1.14.0
+django-dia==0.4.1
+django-extensions==3.1.5
+pytz==2019.1
+six==1.16.0
+sqlparse==0.3.0

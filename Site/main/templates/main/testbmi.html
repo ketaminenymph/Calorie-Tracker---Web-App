@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Body Mass Index{% endblock %}
+
+    {% block content %}
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar bg-primary">
+                <div class="container">
+                    <a class="navbar-brand" href="{% url 'dashboard' %}">healthT R A C K E R</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicNav" aria-controls="basicNav" aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="basicNav">
+                <ul class="navbar-nav mr-auto smooth-scroll">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="#">Body Mass Index</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav nav-flex-icons">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'viewprofile' %}">{{user.username}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <p><a class="btn btn-primary" href="{% url 'logout' %}">Logout</a></p>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-secondary" href="{% url 'signup' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="bg-dark text-white" style="height:100vh;">
+    <br><br>
+    <div class="page-header">
+        <div class="col-sm-5 offset-sm-3 text-center">
+            <div class="jumbotron bg-dark text-white border border-success rounded-pill">
+                <form action="" method="POST">
+                    <div class="form-group">
+                    {% csrf_token %}
+                    <table>
+                    {{ form.as_table }}
+                    </table>
+                    </div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-secondary" href="{% url 'viewbmi' %}">View Previous Records</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+    
+    
+    {% endblock %}

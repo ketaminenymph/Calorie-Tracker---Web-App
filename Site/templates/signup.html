@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<style type="text/css">
+
+</style>
+<div class="jumbotron bg-dark text-white" style="height:100vh;" id="intro-form">
+<div class="container">
+<h1 class="display-4">Create Account:</h1>
+<br>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group row flex-v-center">
+        <div class="col-sm-10">
+            {{ form.as_p }}
+        </div>
+    </div>
+    <hr>
+    <div class="form-group-row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+{% endblock %}

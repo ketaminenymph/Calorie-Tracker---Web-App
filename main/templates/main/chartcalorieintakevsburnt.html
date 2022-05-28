@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Calorie Intake vs Burnt Chart{% endblock %}
+{% block content %}
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar bg-primary">
+                <div class="container">
+                    <a class="navbar-brand" href="{% url 'dashboard' %}">healthT R A C K E R</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicNav" aria-controls="basicNav" aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="basicNav">
+                <ul class="navbar-nav mr-auto smooth-scroll">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="#"></a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav nav-flex-icons">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'viewprofile' %}">{{user.username}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <p><a class="btn btn-primary" href="{% url 'logout' %}">Logout</a></p>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-secondary" href="{% url 'signup' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<br><br><br>
+
+    <div id="container"></div>
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script>
+        Highcharts.chart('container', {
+        chart: {
+            type: 'column',
+        },
+        title: {
+            text: 'Calorie Intake in comparison to Calories Burnt over a week'
+        },
+        yAxis: {
+          title:{
+            text: 'Calories(Kcal)'
+          }
+        },
+        xAxis: {
+            categories: [
+            {% for entry in dataset1 %}'{{ entry.date_rec}}'{% if not forloop.last %}, {% endif %}{% endfor %}
+            ]
+        },
+        series: [{
+            name: 'Intake(Kcal)',
+            data: [
+              {% for entry in dataset1 %} {{ entry.calorie_intake}}{% if not forloop.last %}, {% endif %}{% endfor %}
+            ],
+            color: 'red'
+        },{
+            name: 'Burnt(Kcal)',
+            data: [
+                {% for entry in dataset2 %} {{ entry.totalcalories_burnt}}{% if not forloop.last %}, {% endif %}{% endfor %}
+                ],
+            color: 'blue'
+        },
+        ]
+    });
+  </script>
+
+{% endblock %}

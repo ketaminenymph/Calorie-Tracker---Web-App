@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang='en'>
+    <head>  
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    {{script | safe}}
+    <title>dash</title>
+    </head>
+
+    <body>
+        <h1>Some Line Charts loaded in Ajax!</h1>
+        <canvas id="funchart" width="75" height="50"></canvas>
+    <!--    <script type="text/javascript">  
+        var a = document.getElementById('funchart').getContext('2d');
+        var myLineChart = new Chart(a, {
+               type: 'line',
+               data: {
+                   labels:[{% for i in bmi %}'{{ i.height|safe }}',{% endfor %}],
+                   datasets: [{
+                        label:'Data',
+                        data: [{% for i in bmi %}'{{ i.calculated_bmi }}',{% endfor %}]
+                             }]
+                      },
+               options:{
+                   scales: {
+                       xAxes: [{
+                           display:true
+                              }],
+                       yAxes: [{
+                           ticks: {
+                               beginAtZero:true
+                                   }
+                               }]
+                            }
+                        }
+                      });
+        </script>-->
+        <script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Historic World Population by Region'
+        },
+        xAxis: {
+            categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania']
+        },
+        series: [{
+            name: 'Year 1800',
+            data: [107, 31, 635, 203, 2]
+        }, {
+            name: 'Year 1900',
+            data: [133, 156, 947, 408, 6]
+        }, {
+            name: 'Year 2012',
+            data: [1052, 954, 4250, 740, 38]
+        }]
+    });
+  </script>
+    </body>
+</html>

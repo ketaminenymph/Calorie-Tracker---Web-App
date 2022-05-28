@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Testwrite{% endblock %}
+
+	{% block content %}
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="{% url 'dashboard' %}">BrandLogoWebsiteName</a>
+				</div>
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+					<a class="nav-link" href="#">Tracker</a>
+					</li>
+				</ul>
+				
+				<ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">{{user.username}}</a>
+					</li>
+					
+					{% if user.is_authenticated %}
+					<li class="nav-item">
+						<p><a class="btn btn-primary" href="{% url 'logout' %}">Logout</a></p>
+					</li>
+					{% else %}
+					<li>
+						<a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+					</li>
+					<li>
+						<a class="btn btn-secondary" href="{% url 'signup' %}">Register</a>
+					</li>
+					{% endif %}
+				</ul>
+	</nav>
+	
+	<div class="page-header">
+			<form action="" method="POST">
+				{% csrf_token %}
+    			<table>
+    			{{ form.as_table }}
+    			</table>
+    		<input type="submit" value="Submit">
+			</form>
+	</div>
+	
+	
+	
+	
+	{% endblock %}
